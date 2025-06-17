@@ -10,7 +10,7 @@ from utils import *
 
 def example_complete_scenario(refresh_token: str):
     """
-    Example showing how to run a complete scenario using the Rackspace Spot SDK.
+    Example showing how to run a complete scenario using the Rackspace Spot SDK Script.
     This includes creating a cloudspace, spot node pools, and on-demand node pools,
     and performing various operations like listing resources and deleting them.
     """

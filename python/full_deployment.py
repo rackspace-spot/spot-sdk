@@ -10,7 +10,10 @@ from dynamic_pools_config import spot_pools_config, on_demand_pools_config
 
 # Example of complete environment setup
 def example_full_deployment(refresh_token: str):
-    """Example full deployment showing how to create a complete environment, get environment status of all resources, and clean up environment."""
+    """
+    Example showing how to run a full deployment using the Rackspace Spot SDK Script.
+    This includes create environment, get environment status of all resources, and clean up environment.
+    """
 
     print("Starting full deployment example...")
 

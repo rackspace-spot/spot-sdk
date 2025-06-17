@@ -117,6 +117,9 @@ def wait_for_cloudspace_ready(
 
 
 def parse_args():
+    """
+    Parse command line arguments for the Rackspace Spot SDK operations.
+    """
     parser = argparse.ArgumentParser(description="Running complete cycle of Rackspace Spot SDK operations")
     parser.add_argument('--refresh-token', required=True, help='Refresh token for OAuth authentication')
     parser.add_argument('--complete-scenario', action='store_true', help='Run the complete scenario')

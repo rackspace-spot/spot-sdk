@@ -15,10 +15,10 @@ from complete_scenario import example_complete_scenario
 # Example usage
 
 if __name__ == "__main__":
-    # Initialize client
+    # Parse command line arguments
     args = parse_args()
     
-    # Initialize client with refresh token
+    # Get refresh token from args
     refresh_token = args.refresh_token
     if not refresh_token:
         print("Refresh token is required.")
