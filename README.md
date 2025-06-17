@@ -1,4 +1,5 @@
 # Introduction:
+🚀 This repository contains code examples in different languages that demonstrate how to use Rackspace Spot SDK Scripts to try and test the creation, listing and cleanup of cloud infrastructure resources in your cloudspaces. It helps simulate how resources like environments, spot instances, and on-demand pools are managed end-to-end — from creation to teardown.
 
 # Pre-requisites:
 1. Need to have organization (namespace) setted up already to perform CRUD operations in cluster.
