@@ -1,0 +1,30 @@
+# Copyright © Rackspace US, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+# Python virtual environments
+*.venv/
+venv/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Distribution / packaging
+.Python
+build/
+dist/
+wheels/
+lib/
+lib64/
+sdist/
+var/
+
+# Logs file:
+*.log
+
+# Visual Studio Code
+.vscode/
+
+# PyCharm
+.idea/
