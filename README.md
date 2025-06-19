@@ -44,6 +44,8 @@
 Refer each language specific setup configuration in their respective folders.
 
 # Additional References:
+For documentation, system architecture details and the changelog with the latest updates, please refer to the [official Rackspace Spot documentation page](https://spot.rackspace.com/docs)
+
 All public available APIs can be found in the [Rackspace Spot Public API Documentation](https://spot.rackspace.com/rackspace-spot-public-api)
 
 ## 📜 License

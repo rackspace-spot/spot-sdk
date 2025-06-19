@@ -131,7 +131,7 @@ Edit dynamic_pools_config.py to customize:
 
 - Resource specifications
 
-- If you wish to obtain different serverclass, please refer to public api docs from additional reference section below.
+- If you wish to choose a different serverclass (which may also depend on the region where your Cloudspace is deployed or available), please refer to the Public API documentation in the Additional References section below.
 
 ### Additional References:
 All public available APIs can be found in the [Rackspace Spot Public API Documentation](https://spot.rackspace.com/rackspace-spot-public-api)
