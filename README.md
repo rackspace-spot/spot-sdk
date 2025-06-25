@@ -48,6 +48,19 @@ For documentation, system architecture details and the changelog with the latest
 
 All public available APIs can be found in the [Rackspace Spot Public API Documentation](https://spot.rackspace.com/rackspace-spot-public-api)
 
+# Contributing
+Thank you for your interest in the Spot SDK!
+
+At this time, we’re unable to support external contributions to the codebase due to proprietary dependencies in the development environment.
+
+However, we welcome your input:
+
+- 🐛 Running into an issue or something not working right?
+    - Please open an issue here at [rackerlabs/spot](https://github.com/rackerlabs/spot/issues)— our team monitors them regularly.
+
+- 💡 Have a suggestion or feedback?
+    - Join the conversation on our Reddit forum - [https://www.reddit.com/r/rxt_spot](https://www.reddit.com/r/rxt_spot).
+
 ## 📜 License
 **Copyright © Rackspace US, Inc. or its affiliates. All Rights Reserved.**  
 
