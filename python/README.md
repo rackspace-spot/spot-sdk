@@ -149,7 +149,7 @@ If you encounter issues:
 - Verify you're in the correct directory (python folder)
 
 ## 🧑‍💻 Support
-For additional support and documentation, please refer to the [official Rackspace Spot documentation](https://spot.rackspace.com/docs/en) or contact Rackspace support.
+For documentation, please refer to the [official Rackspace Spot documentation](https://spot.rackspace.com/docs/en).  For support, ask your questions in the [Rackspace community discussions](https://github.com/rackerlabs/spot/discussions), or drop us an email.
 
 ## 📜 License
 **Copyright © Rackspace US, Inc. or its affiliates. All Rights Reserved.**  
