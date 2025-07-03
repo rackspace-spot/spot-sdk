@@ -134,7 +134,7 @@ Edit dynamic_pools_config.py to customize:
 - If you wish to choose a different serverclass (which may also depend on the region where your Cloudspace is deployed or available), please refer to the Public API documentation in the Additional References section below.
 
 ### Additional References:
-All public available APIs can be found in the [Rackspace Spot Public API Documentation](https://spot.rackspace.com/rackspace-spot-public-api)
+All public available APIs can be found in the [Rackspace Spot Public API Documentation](https://spot.rackspace.com/docs/rackspace-spot-public-api)
 
 ## 🧩 Usecase
 - **Complete Scenario**: Useful for understanding the end-to-end flow of resource creation and how the Rackspace Spot system works. Ideal for first-time users exploring the SDK.
@@ -149,7 +149,7 @@ If you encounter issues:
 - Verify you're in the correct directory (python folder)
 
 ## 🧑‍💻 Support
-For additional support and documentation, please refer to the [official Rackspace Spot documentation](https://spot.rackspace.com/docs) or contact Rackspace support.
+For additional support and documentation, please refer to the [official Rackspace Spot documentation](https://spot.rackspace.com/docs/en) or contact Rackspace support.
 
 ## 📜 License
 **Copyright © Rackspace US, Inc. or its affiliates. All Rights Reserved.**  
