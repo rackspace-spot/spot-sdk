@@ -27,12 +27,6 @@ def create_cloudspace_and_spot_node_pool(refresh_token: str):
 
     print(f"Creation requested submitted for cloudspace: {cloudspace.name}")
     
-    print("Waiting for cloudspace to be ready for couple of minutes (upto 5 minutes )...")
-
-    time.sleep(5*60)
-
-    print(f"Clouspace - {cloudspace.name} is now ready to use.")
-
     pool_obj = SpotNodePool(
                 name=str(uuid.uuid4()).lower(),
                 namespace=client.namespace,

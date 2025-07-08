@@ -25,28 +25,21 @@ def example_complete_scenario(refresh_token: str):
             namespace = client.namespace
             if not namespace:
                 raise RackspaceSpotAPIError("No namespace found in organizations for given refresh token. Please check whether refresh token belongs to valid organization.")
-            time.sleep(5)
 
             # List available regions
             regions = client.list_regions()
             print(f"Available regions: {[r.name for r in regions]}")
             
-            time.sleep(5)
-
             # List server classes
             server_classes = client.list_server_classes()
             print(f"Available server classes: {[sc.name for sc in server_classes[:5]]}")
             
-            time.sleep(5)
-
             # Get price history for a server class
             try:
                 price_history = client.get_price_history("gp.vs1.medium-iad")
                 print(f"Price history entries: {len(price_history.history)}")
             except Exception as e:
                 print(f"Could not get price history: {e}")
-
-            time.sleep(10)
 
             print(f"Sending request for cloudspace creation with name: test-generate-cloudspace-from-sdk")
 
@@ -64,12 +57,6 @@ def example_complete_scenario(refresh_token: str):
 
             print(f"Creation requested submitted for cloudspace: {cloudspace.name}")
             
-            print("Waiting for cloudspace to be ready for couple of minutes (upto 5 minutes )...")
-
-            time.sleep(5*60)
-
-            print(f"Clouspace - {cloudspace.name} is now ready to use.")
-
             # Create a spot node pool
             pool_obj = SpotNodePool(
                 name=str(uuid.uuid4()).lower(),
@@ -94,9 +81,7 @@ def example_complete_scenario(refresh_token: str):
             ondemand_pool = client.create_on_demand_node_pool(pool_obj)
             
             print(f"Creation requested submitted for ondemand node pool: {ondemand_pool.name}")
-            
-            print("Waiting for spot pool and ondemand pool to be ready for some minutes ( upto 20 minutes )...")
-
+            print("Waiting for resources - spot pool and ondemand pool to be ready ... (upto 20 minutes)")
             time.sleep(20*60)
 
             # List cloudspaces
@@ -105,15 +90,11 @@ def example_complete_scenario(refresh_token: str):
             cloudspaces = client.list_cloudspaces(namespace)
             print(f"Cloudspaces in namespace: {[cs.name for cs in cloudspaces]}")
 
-            time.sleep(5)
-
             # List spot pools
             print("Listing spot pools in namespace...")
 
             spot_pools_list = client.list_spot_node_pools(namespace)
             print(f"Spot Pools in namespace: {[cs.name for cs in spot_pools_list]}")
-
-            time.sleep(5)
 
             # List ondemand pools
             print("Listing ondemand pools in namespace...")
@@ -121,20 +102,15 @@ def example_complete_scenario(refresh_token: str):
             ondemand_pools_list = client.list_on_demand_node_pools(namespace)
             print(f"Ondemand Pools in namespace: {[cs.name for cs in ondemand_pools_list]}")
 
-            time.sleep(5)
-
             print("Deleting resources in cluster")
             # Delete spot pools.
             print("Deleting spot pools...")
             client.delete_spot_node_pool(namespace, spot_pool.name)
             
-            time.sleep(60)
             # Delete on-demand pools
             print("Deleting on-demand pools...")
             client.delete_on_demand_node_pool(namespace, ondemand_pool.name)
             
-            time.sleep(60)
-
             # Delete cloudspaces
             print("Deleting cloudspace...")
             client.delete_cloudspace(namespace, cloudspace.name)

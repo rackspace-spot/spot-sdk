@@ -69,9 +69,6 @@ class RackspaceSpotManager:
             cloudspace = self.client.create_cloudspace(cloudspace_object)
 
             print(f"Creating Cloudspace: {cloudspace.name} in namespace {namespace} with region {region} and kubernetes version {kubernetes_version}.")
-            print("Waiting for cloudspace to be ready for couple of minutes (upto 5 minutes )...")
-
-            time.sleep(5*60)
 
         result['cloudspace'] = cloudspace
 
@@ -97,11 +94,8 @@ class RackspaceSpotManager:
                 pool = self.client.create_on_demand_node_pool(pool_obj)
                 result['on_demand_pools'].append(pool)
         
-        print("Waiting for resources - spot pool and ondemand pool to be ready... ( upto 20 minutes )")
-
+        print("Waiting for resources - spot pool and ondemand pool to be ready ... (upto 20 minutes)")
         time.sleep(20*60)
-
-        print("Resources should be created in you cloudspace and ready to use.")
         return result
     
     def cleanup_environment(self, namespace: str, resources: dict) -> bool:
@@ -130,17 +124,11 @@ class RackspaceSpotManager:
                     if available_pool.name == user_pool.name:
                         self.client.delete_on_demand_node_pool(namespace, user_pool.name)
             
-            print("Waiting for spot and ondemand resources to be deleted... ( upto 1 minute )")
-            time.sleep(60)
-
             # Delete cloudspaces
             cloudspaces = self.client.list_cloudspaces(namespace)
             for cloudspace in cloudspaces:
                 if cloudspace.name == resources["cloudspace"].name:
                     self.client.delete_cloudspace(namespace, cloudspace.name)
-
-            print("Waiting for cloudspace resource to be deleted... ( upto 1 minute )")
-            time.sleep(60)
 
             print("Resource cleanup completed successfully.")
             return True
