@@ -70,7 +70,21 @@ Simulates a scalable deployment lifecycle with three stages:
 ---
 
 ## 🛠️ Installation
+### 📦 Option 1: Install directly from GitHub (for end users or automation)
+```bash
+# (Optional) Create a virtual environment
+python -m venv .venv
+source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 
+pip install git+https://github.com/rackspace-spot/spot-sdk.git#subdirectory=python
+```
+- To see how to use the SDK in your own project, refer to the sample script:
+- 📄 [`examples/create_cloudspace.py`](./examples/create_cloudspace.py) – Demonstrates how to initialize the client and create a cloudspace using the SDK.
+- You can use this as a reference to integrate the SDK in your own Python code.
+
+---
+
+###  📦 Option 2: Clone and install locally (Recommended for contributors)
 ```bash
 # Clone the repository
 git clone <repo_url>
