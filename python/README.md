@@ -53,7 +53,7 @@ Simulates a scalable deployment lifecycle with three stages:
 
 ### 🔧 Requirements
 
-- Python **3.8** or newer
+- Python **3.10** or newer
 - A **refresh token** from Rackspace Spot
 
 > On macOS/Linux, use `python3` and `pip3` if `python` defaults to Python 2.
