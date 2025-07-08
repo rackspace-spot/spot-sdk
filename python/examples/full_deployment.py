@@ -3,9 +3,9 @@
 
 import json
 
-from client import RackspaceSpotClient
-from classes import RackspaceSpotAPIError
-from manager import RackspaceSpotManager
+from client.client import RackspaceSpotClient
+from client.classes import RackspaceSpotAPIError
+from client.manager import RackspaceSpotManager
 from dynamic_pools_config import spot_pools_config, on_demand_pools_config
 
 # Example of complete environment setup
@@ -22,8 +22,14 @@ def example_full_deployment(refresh_token: str):
     
     # Get namespace
     orgs = client.list_organizations()
-    namespace = orgs[0].namespace
-    
+    namespace = ""
+    if orgs:
+        namespace = client.namespace
+        if not namespace:
+            exit("No namespace found in organizations for given refresh token. Please check whether refresh token belongs to valid organization.")
+    else:
+        exit("No organizations found. Please check your credentials or organization setup.")
+
     # Obtain number and config of pools needed
     spot_pools = spot_pools_config
     

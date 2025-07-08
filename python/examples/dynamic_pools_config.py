@@ -7,8 +7,8 @@ spot_pools_config = [
     {
         'name': str(uuid.uuid4()).lower(),
         'server_class': 'gp.vs1.medium-iad',
-        'desired_nodes': 2,
-        'bid_price': '0.55'
+        'desired': 2, # node count
+        'bid_price': '0.55' # update as per current market price
     }
     ## .... Add more spot pools as needed here 
 ]
@@ -17,7 +17,7 @@ on_demand_pools_config = [
     {
         'name': str(uuid.uuid4()).lower(),
         'server_class': 'gp.vs1.medium-iad',
-        'desired_nodes': 1
+        'desired': 1  # node count
     }
     ## .... Add more on-demand pools as needed here 
 ]

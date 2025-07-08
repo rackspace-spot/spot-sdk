@@ -1,6 +1,6 @@
 # 🚀 Rackspace Spot SDK Script Runner
 
-The Python script demonstrates how to use the **Rackspace Spot SDK** for orchestrating cloud resources such as cloudspaces, spot pools, and on-demand pools. You can execute a **Complete Scenario**, a **Full Deployment**, or **both**, depending on the flags provided.
+The Python scripts in **examples** folder demonstrates how to use the **Rackspace Spot SDK** for orchestrating cloud resources such as cloudspaces, spot pools, and on-demand pools. You can execute operations like: **Create Clouspace**, **Delete Cloudspace**, **Complete Scenario**, **Full Deployment** depending on the flags provided for latter two.
 
 ---
 
@@ -15,6 +15,14 @@ The Rackspace Spot SDK provides tools to manage cloud resources programmatically
 ---
 
 ## 🧪 Scenario Types
+
+### ✅ Create and Delete Cloudspaces:
+-  Simulates **creation** of **cloudspace** with **spotnodepool**
+-  **Delete** above created **cloudspace** and **spotnodepool**
+
+> Use this to understand how to create and delete cloudspace successfully.
+
+---
 
 ### ✅ Complete Scenario
 
@@ -66,14 +74,18 @@ Simulates a scalable deployment lifecycle with three stages:
 ```bash
 # Clone the repository
 git clone <repo_url>
+cd spot_sdk
 cd python
 
 # (Optional) Create a virtual environment
 python -m venv .venv
 source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 
-# Install dependencies
-pip install -r requirements.txt
+#  Install runtime dependencies like setuptools for other dependencies installation
+pip install -r requirements.txt 
+
+#  Install SDK in editable mode - (🧩 Enable local SDK usage)
+pip install -e .     
 ```
 
 ## 📦 Script Description
@@ -86,35 +98,47 @@ This script accepts a required OAuth --refresh-token and one of the flags:
 | `--full-deployment`      | To run the full deployment
 
 
-#### ⚠️ The script will exit if neither scenario (complete-scenario or full-deployment) is enabled.
-
-## ▶️ Usage Examples
-### ✅ 1. Run Only the Complete Scenario (Default Behavior)
+## ▶️ Usage Examples (Must be in **python** directory to run commands)
+### ✅ 1. Run Cloudspace creation with Spotnodepool scenario
 You can simply run the script with your refresh token:
 
 ```bash
-python main.py --refresh-token <YOUR_REFRESH_TOKEN> --complete-scenario
+python examples/create_cloudspace.py --refresh-token <YOUR_REFRESH_TOKEN>
 ```
 
-## ✅ 2. Run Only the Full Deployment
+### ✅ 2. Run Cloudspace deletion with Spotnodepool scenario
+You can simply run the script with your refresh token:
+(Make sure that the cloudspace with the given name in delete_cloudspace.py file exists in the organization associated with the incoming refresh token)
+```bash
+python examples/delete_cloudspace.py --refresh-token <YOUR_REFRESH_TOKEN>
+```
+
+### ✅ 3. Run Only the Complete Scenario
+You can simply run the script with your refresh token:
+
+```bash
+python examples/main.py --refresh-token <YOUR_REFRESH_TOKEN> --complete-scenario
+```
+
+## ✅ 4. Run Only the Full Deployment
 To run just the full deployment and skip the complete scenario:
 
 ```bash
-python main.py --refresh-token <YOUR_REFRESH_TOKEN> --full-deployment
+python examples/main.py --refresh-token <YOUR_REFRESH_TOKEN> --full-deployment
 ```
 
-## ✅ 3. Run Both Scenarios
+## ✅ 5. Run Both Scenarios
 This will execute both scenarios one after another:
 
 ```bash
-python main.py --refresh-token <YOUR_REFRESH_TOKEN> --complete-scenario --full-deployment
+python examples/main.py --refresh-token <YOUR_REFRESH_TOKEN> --complete-scenario --full-deployment
 ```
 
-## ❌ 4. Run Neither Scenario (Invalid – Will Exit)
+## ❌ 6. Run Neither Scenario (Invalid – Will Exit)
 This will result in an error because no scenarios are selected:
 
 ```bash
-python main.py --refresh-token <YOUR_REFRESH_TOKEN>
+python examples/main.py --refresh-token <YOUR_REFRESH_TOKEN>
 ```
 Output:
 
@@ -137,6 +161,7 @@ Edit dynamic_pools_config.py to customize:
 All public available APIs can be found in the [Rackspace Spot Public API Documentation](https://spot.rackspace.com/docs/rackspace-spot-public-api)
 
 ## 🧩 Usecase
+- **Create and Delete Cloudspaces**: Useful for understanding the cloudspace creation and deletion operations in Rackspace Spot. Ideal for first-time users exploring the SDK.
 - **Complete Scenario**: Useful for understanding the end-to-end flow of resource creation and how the Rackspace Spot system works. Ideal for first-time users exploring the SDK.
 - **Full Deployment**: Designed for CI/CD pipelines to test the system's functionality and resource orchestration in environments that closely resemble production.
 
@@ -149,7 +174,7 @@ If you encounter issues:
 - Verify you're in the correct directory (python folder)
 
 ## 🧑‍💻 Support
-For documentation, please refer to the [official Rackspace Spot documentation](https://spot.rackspace.com/docs/en).  For support, ask your questions in the [Rackspace community discussions](https://github.com/rackerlabs/spot/discussions), or drop us an email.
+For documentation, please refer to the [official Rackspace Spot documentation](https://spot.rackspace.com/docs/en). For support, ask your questions in the [Rackspace community discussions](https://github.com/rackerlabs/spot/discussions), or drop us an email.
 
 ## 📜 License
 **Copyright © Rackspace US, Inc. or its affiliates. All Rights Reserved.**  
