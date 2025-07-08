@@ -1,11 +1,11 @@
 # Copyright © Rackspace US, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
+import uuid
 import time
 
-from client import RackspaceSpotClient
-from classes import RackspaceSpotAPIError
-from utils import *
+from client.client import RackspaceSpotClient
+from client.classes import RackspaceSpotAPIError, CloudSpace, SpotNodePool, OnDemandNodePool, KubernetesVersion
 
 
 def example_complete_scenario(refresh_token: str):
@@ -22,9 +22,9 @@ def example_complete_scenario(refresh_token: str):
         # List organizations to get namespace
         orgs = client.list_organizations()
         if orgs:
-            namespace = orgs[0].namespace
-            print(f"Using namespace: {namespace}")
-            
+            namespace = client.namespace
+            if not namespace:
+                raise RackspaceSpotAPIError("No namespace found in organizations for given refresh token. Please check whether refresh token belongs to valid organization.")
             time.sleep(5)
 
             # List available regions
@@ -46,51 +46,53 @@ def example_complete_scenario(refresh_token: str):
             except Exception as e:
                 print(f"Could not get price history: {e}")
 
-            time.sleep(5)
+            time.sleep(10)
 
-            time.sleep(5)
+            print(f"Sending request for cloudspace creation with name: test-generate-cloudspace-from-sdk")
 
-            # Create a cloudspace
-            cloudspace = create_basic_cloudspace(
-                client=client,
+            # Create a cloudspace - assuming that cloudspace with same name doesn't exist already in your namespace.
+            # If it exists, it will throw an error and would stop its execution.
+
+            cloudspace_object = CloudSpace(
                 name="test-generate-cloudspace-from-sdk",
                 namespace=namespace,
-                region="us-east-iad-1"
+                region="us-east-iad-1",
+                kubernetes_version=KubernetesVersion.V1_31_1.value
             )
+
+            cloudspace = client.create_cloudspace(cloudspace_object)
+
             print(f"Creation requested submitted for cloudspace: {cloudspace.name}")
             
-            print("Waiting for cloudspace to be ready for couple of minutes (upto 3 minutes )...")
+            print("Waiting for cloudspace to be ready for couple of minutes (upto 5 minutes )...")
 
-            time.sleep(3*60)
-
-            # Wait for cloudspace to be ready
-            cloudspace = wait_for_cloudspace_ready(
-                client=client,
-                namespace=namespace,
-                name=cloudspace.name
-            )
+            time.sleep(5*60)
 
             print(f"Clouspace - {cloudspace.name} is now ready to use.")
 
             # Create a spot node pool
-            spot_pool = create_basic_spot_pool(
-                client=client,
+            pool_obj = SpotNodePool(
+                name=str(uuid.uuid4()).lower(),
                 namespace=namespace,
-                cloudspace_name=cloudspace.name,
+                cloudspace=cloudspace.name,
                 server_class="gp.vs1.medium-iad",
-                desired_nodes=2,
-                bid_price="0.5"
+                desired=2,
+                bid_price="0.5" # update as per current market price
             )
+            spot_pool = client.create_spot_node_pool(pool_obj)
+            
             print(f"Creation requested submitted for spot node pool: {spot_pool.name}")
             
             # Create a ondemand node pool
-            ondemand_pool = create_basic_on_demand_pool(
-                client=client,
+            pool_obj = OnDemandNodePool(
+                name=str(uuid.uuid4()).lower(),
                 namespace=namespace,
-                cloudspace_name=cloudspace.name,
+                cloudspace=cloudspace.name,
                 server_class="gp.vs1.medium-iad",
-                desired_nodes=2
+                desired=2
             )
+            ondemand_pool = client.create_on_demand_node_pool(pool_obj)
+            
             print(f"Creation requested submitted for ondemand node pool: {ondemand_pool.name}")
             
             print("Waiting for spot pool and ondemand pool to be ready for some minutes ( upto 20 minutes )...")

@@ -4,13 +4,8 @@
 import time
 from typing import Dict, List, Optional, Any
 
-from client import RackspaceSpotClient
-from classes import KubernetesVersion
-from utils import (
-    create_basic_cloudspace, 
-    create_basic_spot_pool, 
-    create_basic_on_demand_pool
-) 
+from client.client import RackspaceSpotClient
+from client.classes import KubernetesVersion, CloudSpace, SpotNodePool, OnDemandNodePool
 
 class RackspaceSpotManager:
     """
@@ -65,13 +60,14 @@ class RackspaceSpotManager:
             print(f"Cloudspace {cloudspace_name} already exists in namespace {namespace}.")
             print("Leveraging existing cloudspace for spot and ondemand resource pools creation.")
         else:
-            cloudspace = create_basic_cloudspace(
-                client=self.client,
+            cloudspace_object = CloudSpace(
                 name=cloudspace_name,
                 namespace=namespace,
                 region=region,
                 kubernetes_version=kubernetes_version
             )
+            cloudspace = self.client.create_cloudspace(cloudspace_object)
+
             print(f"Creating Cloudspace: {cloudspace.name} in namespace {namespace} with region {region} and kubernetes version {kubernetes_version}.")
             print("Waiting for cloudspace to be ready for couple of minutes (upto 5 minutes )...")
 
@@ -82,23 +78,23 @@ class RackspaceSpotManager:
         # Create spot pools
         if spot_pools:
             for _, pool_config in enumerate(spot_pools):
-                pool = create_basic_spot_pool(
-                    client=self.client,
+                pool_obj = SpotNodePool(
                     namespace=namespace,
-                    cloudspace_name=cloudspace.name,
+                    cloudspace=cloudspace_name,
                     **pool_config
                 )
+                pool = self.client.create_spot_node_pool(pool_obj)
                 result['spot_pools'].append(pool)
         
         # Create on-demand pools
         if on_demand_pools:
             for _, pool_config in enumerate(on_demand_pools):
-                pool = create_basic_on_demand_pool(
-                    client=self.client,
+                pool_obj = OnDemandNodePool(
                     namespace=namespace,
-                    cloudspace_name=cloudspace.name,
+                    cloudspace=cloudspace_name,
                     **pool_config
                 )
+                pool = self.client.create_on_demand_node_pool(pool_obj)
                 result['on_demand_pools'].append(pool)
         
         print("Waiting for resources - spot pool and ondemand pool to be ready... ( upto 20 minutes )")

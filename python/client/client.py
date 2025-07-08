@@ -2,12 +2,14 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import uuid
+import jwt
+import requests
+
 from typing import Dict, List, Optional
 from datetime import datetime
-import requests
 from urllib.parse import urljoin
 
-from classes import *
+from client.classes import *
 
 
 class RackspaceSpotClient:
@@ -47,6 +49,7 @@ class RackspaceSpotClient:
         
         # Authenticate on initialization
         self._authenticate()
+        self.namespace = self.get_namespace()
     
     def _authenticate(self):
         """Authenticate and get access token."""
@@ -81,6 +84,22 @@ class RackspaceSpotClient:
         except requests.exceptions.RequestException as e:
             raise RackspaceSpotAPIError(f"Authentication failed: {str(e)}")
     
+    def get_namespace(self):
+        try:
+            decoded_token = jwt.decode(self.access_token, options={"verify_signature": False})
+            org_id = decoded_token.get("org_id")
+
+            if not org_id:
+                raise ValueError("org_id not found in token")
+            
+            formatted_org_id = org_id.lower().replace("_", "-")
+            return formatted_org_id
+
+        except jwt.ExpiredSignatureError:
+            raise RackspaceSpotAPIError("Token has expired")
+        except jwt.InvalidTokenError:
+            raise RackspaceSpotAPIError("Invalid token")
+
     def _make_request(
         self,
         method: str,
