@@ -4,8 +4,8 @@
 import uuid
 import time
 
-from client.client import RackspaceSpotClient
-from client.classes import RackspaceSpotAPIError, CloudSpace, SpotNodePool, OnDemandNodePool, KubernetesVersion
+from rackspace_spot_sdk.client import RackspaceSpotClient
+from rackspace_spot_sdk.classes import RackspaceSpotAPIError, CloudSpace, SpotNodePool, OnDemandNodePool, KubernetesVersion
 
 
 def example_complete_scenario(refresh_token: str):

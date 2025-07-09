@@ -1,9 +1,8 @@
 import argparse
 import uuid
-import time
 
-from client.client import RackspaceSpotClient
-from client.classes import CloudSpace, KubernetesVersion, SpotNodePool
+from rackspace_spot_sdk.client import RackspaceSpotClient
+from rackspace_spot_sdk.classes import CloudSpace, KubernetesVersion, SpotNodePool
 
 def parse_args():
     """

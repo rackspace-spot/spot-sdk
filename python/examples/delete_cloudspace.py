@@ -1,6 +1,6 @@
 import argparse
 
-from client.client import RackspaceSpotClient
+from rackspace_spot_sdk.client import RackspaceSpotClient
 
 def parse_args():
     """

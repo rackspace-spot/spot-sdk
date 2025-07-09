@@ -1,13 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='spot-sdk',
+    name='rackspace-spot-sdk',
     version='0.1.0',
     description='Rackspace Spot SDK for Python',
     author='Rackspace Spot Team',
     license = "Apache-2.0",
     readme = "README.md",
-    packages=find_packages(),
+    packages=find_packages(where="."),
+    package_dir={"": "."},
     install_requires=[
         'requests',
         'PyJWT',

@@ -9,7 +9,7 @@ from typing import Dict, List, Optional
 from datetime import datetime
 from urllib.parse import urljoin
 
-from client.classes import *
+from rackspace_spot_sdk.classes import *
 
 
 class RackspaceSpotClient:
