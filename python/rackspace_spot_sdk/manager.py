@@ -4,8 +4,8 @@
 import time
 from typing import Dict, List, Optional, Any
 
-from client.client import RackspaceSpotClient
-from client.classes import KubernetesVersion, CloudSpace, SpotNodePool, OnDemandNodePool
+from rackspace_spot_sdk.client import RackspaceSpotClient
+from rackspace_spot_sdk.classes import KubernetesVersion, CloudSpace, SpotNodePool, OnDemandNodePool
 
 class RackspaceSpotManager:
     """

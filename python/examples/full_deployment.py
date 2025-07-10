@@ -3,10 +3,10 @@
 
 import json
 
-from client.client import RackspaceSpotClient
-from client.classes import RackspaceSpotAPIError
-from client.manager import RackspaceSpotManager
-from dynamic_pools_config import spot_pools_config, on_demand_pools_config
+from rackspace_spot_sdk.client import RackspaceSpotClient
+from rackspace_spot_sdk.classes import RackspaceSpotAPIError
+from rackspace_spot_sdk.manager import RackspaceSpotManager
+from nodepools_config import spot_pools_config, on_demand_pools_config
 
 # Example of complete environment setup
 def example_full_deployment(refresh_token: str):

@@ -41,7 +41,7 @@ Simulates a full Rackspace Spot workflow:
 
 Simulates a scalable deployment lifecycle with three stages:
 
-1. **Create Environment**: Provisions one cloudspace and multiple spot/on-demand pools based on `dynamic_pools_config.py`.
+1. **Create Environment**: Provisions one cloudspace and multiple spot/on-demand pools based on `nodepools_config.py`.
 2. **Get Environment**: Lists all created resources.
 3. **Cleanup Environment**: Tears down the created resources.
 
@@ -161,7 +161,7 @@ Please provide the --complete-scenario or --full-deployment argument to run the 
 ```
 
 ## 📦 Configuration Options
-Edit dynamic_pools_config.py to customize:
+Edit nodepools_config.py to customize:
 
 - Number of spot pools
 

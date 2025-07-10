@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # Build Files
-spot_sdk.egg-info
+*.egg-info
 
 # Python virtual environments
 *.venv/
